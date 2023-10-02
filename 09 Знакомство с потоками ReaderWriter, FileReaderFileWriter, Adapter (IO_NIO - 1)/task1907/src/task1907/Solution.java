@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /* 
 Считаем слово
@@ -21,6 +23,24 @@ Requirements:
 5. Программа должна выводить в консоль количество слов "world", которые встречаются в файле.*/
 
 public class Solution {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+             BufferedReader fr = new BufferedReader(new FileReader(reader.readLine()))) {
+            int count = 0;
+
+            while (fr.ready()) {
+//                \\b  Это якорь слова (word boundary), который обозначает границу слова.
+//                        Это гарантирует, что мы ищем только отдельное слово "world" и не находим его внутри других слов.
+//                \\b: Еще один якорь слова, который указывает на конец слова.
+                Pattern pattern = Pattern.compile("\\b[wW]orld\\b");
+                Matcher matcher = pattern.matcher(fr.readLine());
+                while (matcher.find()) {
+                    count++;
+                }
+            }
+            System.out.println(count);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
