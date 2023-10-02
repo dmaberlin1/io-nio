@@ -37,6 +37,23 @@ Requirements:
 4. Поток для чтения из файла должен быть закрыт.*/
 
 public class Solution {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        if(args.length==0){
+            throw new IllegalArgumentException();
+        }
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        //name of file is read from console upon creation bufferReader
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(reader.readLine()));
+        String res;
+
+        while ((res=bufferedReader.readLine()) !=null){
+            if(res.startsWith(args[0]+" ")){
+                System.out.println(res);
+                break;
+            }
+        }
+
+        reader.close();
+        bufferedReader.close();
     }
 }

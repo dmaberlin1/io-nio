@@ -21,11 +21,19 @@ Requirements:
 5. Поток FileInputStream должен быть закрыт.*/
 
 public class Solution {
-    public static void main(String[] args) throws DownloadException {
-
+    public static void main(String[] args) throws DownloadException, IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String file = reader.readLine();
+        reader.close();
+        try (FileInputStream fileInputStream = new FileInputStream(file)) {
+        while (fileInputStream.available()<=1000)
+            DownloadException.getThrow();
+        }
     }
 
     public static class DownloadException extends Exception {
-
+        public static void getThrow() throws DownloadException {
+        throw new DownloadException();
+        }
     }
 }

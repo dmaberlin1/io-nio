@@ -28,7 +28,7 @@ public class Solution {
                     if(max<data)max=data;
                 }
             System.out.println(max);
+            reader.close();
         }
-        reader.close();
     }
 }
